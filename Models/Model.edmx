@@ -1,0 +1,404 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Loango_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Auteur">
+          <Key>
+            <PropertyRef Name="id_auteur" />
+          </Key>
+          <Property Name="id_auteur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom_auteur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nationnalité_auteur" Type="varchar" MaxLength="50" />
+          <Property Name="sexe_auteur" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Categorie">
+          <Key>
+            <PropertyRef Name="id_cat" />
+          </Key>
+          <Property Name="id_cat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code_cat" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Edition">
+          <Key>
+            <PropertyRef Name="id_edition" />
+          </Key>
+          <Property Name="id_edition" Type="int" Nullable="false" />
+          <Property Name="nom_edition" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pays_edition" Type="varbinary" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Livres">
+          <Key>
+            <PropertyRef Name="id_livre" />
+          </Key>
+          <Property Name="id_livre" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="titre_livre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="date_acqui_livre" Type="datetime" Nullable="false" />
+          <Property Name="anné_pub_livre" Type="date" />
+          <Property Name="nbre_page_livre" Type="int" Nullable="false" />
+          <Property Name="id_auteur_liv" Type="int" Nullable="false" />
+          <Property Name="id_cat_liv" Type="int" />
+          <Property Name="id_rayon_liv" Type="int" />
+          <Property Name="id_edition_liv" Type="int" />
+          <Property Name="id_user_liv" Type="int" />
+        </EntityType>
+        <EntityType Name="Rayon">
+          <Key>
+            <PropertyRef Name="id_rayon" />
+          </Key>
+          <Property Name="id_rayon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code_rayon" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom_user" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="prenom_user" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="contact_user" Type="varchar" MaxLength="50" />
+          <Property Name="est_actif" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="password_user" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Livres_Auteur">
+          <End Role="Auteur" Type="Self.Auteur" Multiplicity="1" />
+          <End Role="Livres" Type="Self.Livres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auteur">
+              <PropertyRef Name="id_auteur" />
+            </Principal>
+            <Dependent Role="Livres">
+              <PropertyRef Name="id_auteur_liv" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Livres_Categorie">
+          <End Role="Categorie" Type="Self.Categorie" Multiplicity="0..1" />
+          <End Role="Livres" Type="Self.Livres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorie">
+              <PropertyRef Name="id_cat" />
+            </Principal>
+            <Dependent Role="Livres">
+              <PropertyRef Name="id_cat_liv" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Livres_Edition">
+          <End Role="Edition" Type="Self.Edition" Multiplicity="0..1" />
+          <End Role="Livres" Type="Self.Livres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Edition">
+              <PropertyRef Name="id_edition" />
+            </Principal>
+            <Dependent Role="Livres">
+              <PropertyRef Name="id_edition_liv" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Livres_Rayon">
+          <End Role="Rayon" Type="Self.Rayon" Multiplicity="0..1" />
+          <End Role="Livres" Type="Self.Livres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rayon">
+              <PropertyRef Name="id_rayon" />
+            </Principal>
+            <Dependent Role="Livres">
+              <PropertyRef Name="id_rayon_liv" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Livres_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Livres" Type="Self.Livres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Livres">
+              <PropertyRef Name="id_user_liv" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Loango_dbModelStoreContainer">
+          <EntitySet Name="Auteur" EntityType="Self.Auteur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categorie" EntityType="Self.Categorie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Edition" EntityType="Self.Edition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Livres" EntityType="Self.Livres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rayon" EntityType="Self.Rayon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Livres_Auteur" Association="Self.FK_Livres_Auteur">
+            <End Role="Auteur" EntitySet="Auteur" />
+            <End Role="Livres" EntitySet="Livres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Livres_Categorie" Association="Self.FK_Livres_Categorie">
+            <End Role="Categorie" EntitySet="Categorie" />
+            <End Role="Livres" EntitySet="Livres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Livres_Edition" Association="Self.FK_Livres_Edition">
+            <End Role="Edition" EntitySet="Edition" />
+            <End Role="Livres" EntitySet="Livres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Livres_Rayon" Association="Self.FK_Livres_Rayon">
+            <End Role="Rayon" EntitySet="Rayon" />
+            <End Role="Livres" EntitySet="Livres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Livres_User" Association="Self.FK_Livres_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Livres" EntitySet="Livres" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Loango_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Auteur">
+          <Key>
+            <PropertyRef Name="id_auteur" />
+          </Key>
+          <Property Name="id_auteur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom_auteur" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nationnalité_auteur" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sexe_auteur" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Livres" Relationship="Self.FK_Livres_Auteur" FromRole="Auteur" ToRole="Livres" />
+        </EntityType>
+        <EntityType Name="Categorie">
+          <Key>
+            <PropertyRef Name="id_cat" />
+          </Key>
+          <Property Name="id_cat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code_cat" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Livres" Relationship="Self.FK_Livres_Categorie" FromRole="Categorie" ToRole="Livres" />
+        </EntityType>
+        <EntityType Name="Edition">
+          <Key>
+            <PropertyRef Name="id_edition" />
+          </Key>
+          <Property Name="id_edition" Type="Int32" Nullable="false" />
+          <Property Name="nom_edition" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pays_edition" Type="Binary" MaxLength="50" FixedLength="false" />
+          <NavigationProperty Name="Livres" Relationship="Self.FK_Livres_Edition" FromRole="Edition" ToRole="Livres" />
+        </EntityType>
+        <EntityType Name="Livres">
+          <Key>
+            <PropertyRef Name="id_livre" />
+          </Key>
+          <Property Name="id_livre" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="titre_livre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_acqui_livre" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="anné_pub_livre" Type="DateTime" Precision="0" />
+          <Property Name="nbre_page_livre" Type="Int32" Nullable="false" />
+          <Property Name="id_auteur_liv" Type="Int32" Nullable="false" />
+          <Property Name="id_cat_liv" Type="Int32" />
+          <Property Name="id_rayon_liv" Type="Int32" />
+          <Property Name="id_edition_liv" Type="Int32" />
+          <Property Name="id_user_liv" Type="Int32" />
+          <NavigationProperty Name="Auteur" Relationship="Self.FK_Livres_Auteur" FromRole="Livres" ToRole="Auteur" />
+          <NavigationProperty Name="Categorie" Relationship="Self.FK_Livres_Categorie" FromRole="Livres" ToRole="Categorie" />
+          <NavigationProperty Name="Edition" Relationship="Self.FK_Livres_Edition" FromRole="Livres" ToRole="Edition" />
+          <NavigationProperty Name="Rayon" Relationship="Self.FK_Livres_Rayon" FromRole="Livres" ToRole="Rayon" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Livres_User" FromRole="Livres" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Rayon">
+          <Key>
+            <PropertyRef Name="id_rayon" />
+          </Key>
+          <Property Name="id_rayon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code_rayon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Livres" Relationship="Self.FK_Livres_Rayon" FromRole="Rayon" ToRole="Livres" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom_user" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prenom_user" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contact_user" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="est_actif" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="password_user" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Livres" Relationship="Self.FK_Livres_User" FromRole="User" ToRole="Livres" />
+        </EntityType>
+        <Association Name="FK_Livres_Auteur">
+          <End Role="Auteur" Type="Self.Auteur" Multiplicity="1" />
+          <End Role="Livres" Type="Self.Livres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auteur">
+              <PropertyRef Name="id_auteur" />
+            </Principal>
+            <Dependent Role="Livres">
+              <PropertyRef Name="id_auteur_liv" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Livres_Categorie">
+          <End Role="Categorie" Type="Self.Categorie" Multiplicity="0..1" />
+          <End Role="Livres" Type="Self.Livres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorie">
+              <PropertyRef Name="id_cat" />
+            </Principal>
+            <Dependent Role="Livres">
+              <PropertyRef Name="id_cat_liv" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Livres_Edition">
+          <End Role="Edition" Type="Self.Edition" Multiplicity="0..1" />
+          <End Role="Livres" Type="Self.Livres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Edition">
+              <PropertyRef Name="id_edition" />
+            </Principal>
+            <Dependent Role="Livres">
+              <PropertyRef Name="id_edition_liv" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Livres_Rayon">
+          <End Role="Rayon" Type="Self.Rayon" Multiplicity="0..1" />
+          <End Role="Livres" Type="Self.Livres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rayon">
+              <PropertyRef Name="id_rayon" />
+            </Principal>
+            <Dependent Role="Livres">
+              <PropertyRef Name="id_rayon_liv" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Livres_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Livres" Type="Self.Livres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Livres">
+              <PropertyRef Name="id_user_liv" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Loango_dbEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Auteur" EntityType="Self.Auteur" />
+          <EntitySet Name="Categorie" EntityType="Self.Categorie" />
+          <EntitySet Name="Edition" EntityType="Self.Edition" />
+          <EntitySet Name="Livres" EntityType="Self.Livres" />
+          <EntitySet Name="Rayon" EntityType="Self.Rayon" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK_Livres_Auteur" Association="Self.FK_Livres_Auteur">
+            <End Role="Auteur" EntitySet="Auteur" />
+            <End Role="Livres" EntitySet="Livres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Livres_Categorie" Association="Self.FK_Livres_Categorie">
+            <End Role="Categorie" EntitySet="Categorie" />
+            <End Role="Livres" EntitySet="Livres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Livres_Edition" Association="Self.FK_Livres_Edition">
+            <End Role="Edition" EntitySet="Edition" />
+            <End Role="Livres" EntitySet="Livres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Livres_Rayon" Association="Self.FK_Livres_Rayon">
+            <End Role="Rayon" EntitySet="Rayon" />
+            <End Role="Livres" EntitySet="Livres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Livres_User" Association="Self.FK_Livres_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Livres" EntitySet="Livres" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Loango_dbModelStoreContainer" CdmEntityContainer="Loango_dbEntities1">
+          <EntitySetMapping Name="Auteur">
+            <EntityTypeMapping TypeName="Loango_dbModel.Auteur">
+              <MappingFragment StoreEntitySet="Auteur">
+                <ScalarProperty Name="id_auteur" ColumnName="id_auteur" />
+                <ScalarProperty Name="nom_auteur" ColumnName="nom_auteur" />
+                <ScalarProperty Name="nationnalité_auteur" ColumnName="nationnalité_auteur" />
+                <ScalarProperty Name="sexe_auteur" ColumnName="sexe_auteur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categorie">
+            <EntityTypeMapping TypeName="Loango_dbModel.Categorie">
+              <MappingFragment StoreEntitySet="Categorie">
+                <ScalarProperty Name="id_cat" ColumnName="id_cat" />
+                <ScalarProperty Name="code_cat" ColumnName="code_cat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Edition">
+            <EntityTypeMapping TypeName="Loango_dbModel.Edition">
+              <MappingFragment StoreEntitySet="Edition">
+                <ScalarProperty Name="id_edition" ColumnName="id_edition" />
+                <ScalarProperty Name="nom_edition" ColumnName="nom_edition" />
+                <ScalarProperty Name="pays_edition" ColumnName="pays_edition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Livres">
+            <EntityTypeMapping TypeName="Loango_dbModel.Livres">
+              <MappingFragment StoreEntitySet="Livres">
+                <ScalarProperty Name="id_livre" ColumnName="id_livre" />
+                <ScalarProperty Name="titre_livre" ColumnName="titre_livre" />
+                <ScalarProperty Name="date_acqui_livre" ColumnName="date_acqui_livre" />
+                <ScalarProperty Name="anné_pub_livre" ColumnName="anné_pub_livre" />
+                <ScalarProperty Name="nbre_page_livre" ColumnName="nbre_page_livre" />
+                <ScalarProperty Name="id_auteur_liv" ColumnName="id_auteur_liv" />
+                <ScalarProperty Name="id_cat_liv" ColumnName="id_cat_liv" />
+                <ScalarProperty Name="id_rayon_liv" ColumnName="id_rayon_liv" />
+                <ScalarProperty Name="id_edition_liv" ColumnName="id_edition_liv" />
+                <ScalarProperty Name="id_user_liv" ColumnName="id_user_liv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rayon">
+            <EntityTypeMapping TypeName="Loango_dbModel.Rayon">
+              <MappingFragment StoreEntitySet="Rayon">
+                <ScalarProperty Name="id_rayon" ColumnName="id_rayon" />
+                <ScalarProperty Name="code_rayon" ColumnName="code_rayon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="Loango_dbModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="nom_user" ColumnName="nom_user" />
+                <ScalarProperty Name="prenom_user" ColumnName="prenom_user" />
+                <ScalarProperty Name="contact_user" ColumnName="contact_user" />
+                <ScalarProperty Name="est_actif" ColumnName="est_actif" />
+                <ScalarProperty Name="password_user" ColumnName="password_user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

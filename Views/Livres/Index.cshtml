@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Loango_app.Models.Livres>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.titre_livre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date_acqui_livre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.anné_pub_livre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nbre_page_livre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Auteur.nom_auteur)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Categorie.code_cat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Edition.nom_edition)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rayon.code_rayon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.nom_user)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.titre_livre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date_acqui_livre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.anné_pub_livre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nbre_page_livre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Auteur.nom_auteur)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Categorie.code_cat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Edition.nom_edition)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rayon.code_rayon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.nom_user)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_livre }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_livre }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_livre })
+        </td>
+    </tr>
+}
+
+</table>

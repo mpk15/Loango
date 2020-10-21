@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cebb7c78d8574cb8a966e8fbff934b45" Name="Diagram1">
+        <EntityTypeShape EntityType="Loango_dbModel.Auteur" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="Loango_dbModel.Categorie" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Loango_dbModel.Edition" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Loango_dbModel.Livres" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Loango_dbModel.Rayon" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Loango_dbModel.User" Width="1.5" PointX="0.75" PointY="12.5" IsExpanded="true" />
+        <AssociationConnector Association="Loango_dbModel.FK_Livres_Auteur" ManuallyRouted="false" />
+        <AssociationConnector Association="Loango_dbModel.FK_Livres_Categorie" ManuallyRouted="false" />
+        <AssociationConnector Association="Loango_dbModel.FK_Livres_Edition" ManuallyRouted="false" />
+        <AssociationConnector Association="Loango_dbModel.FK_Livres_Rayon" ManuallyRouted="false" />
+        <AssociationConnector Association="Loango_dbModel.FK_Livres_User" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

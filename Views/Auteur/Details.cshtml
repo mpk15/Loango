@@ -1,0 +1,42 @@
+﻿@model Loango_app.Models.Auteur
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Auteur</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nom_auteur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom_auteur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nationnalité_auteur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nationnalité_auteur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sexe_auteur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sexe_auteur)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_auteur }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

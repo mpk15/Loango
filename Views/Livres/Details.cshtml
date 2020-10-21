@@ -1,0 +1,90 @@
+﻿@model Loango_app.Models.Livres
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Livres</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.titre_livre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.titre_livre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date_acqui_livre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date_acqui_livre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.anné_pub_livre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.anné_pub_livre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nbre_page_livre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nbre_page_livre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Auteur.nom_auteur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Auteur.nom_auteur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Categorie.code_cat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Categorie.code_cat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Edition.nom_edition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Edition.nom_edition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rayon.code_rayon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rayon.code_rayon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.nom_user)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.nom_user)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_livre }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

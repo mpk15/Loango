@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Loango_app.Models.Auteur>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nom_auteur)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nationnalité_auteur)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sexe_auteur)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nom_auteur)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nationnalité_auteur)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sexe_auteur)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_auteur }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_auteur }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_auteur })
+        </td>
+    </tr>
+}
+
+</table>

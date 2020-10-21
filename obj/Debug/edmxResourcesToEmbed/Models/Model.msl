@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Loango_dbModelStoreContainer" CdmEntityContainer="Loango_dbEntities1">
+    <EntitySetMapping Name="Auteur">
+      <EntityTypeMapping TypeName="Loango_dbModel.Auteur">
+        <MappingFragment StoreEntitySet="Auteur">
+          <ScalarProperty Name="id_auteur" ColumnName="id_auteur" />
+          <ScalarProperty Name="nom_auteur" ColumnName="nom_auteur" />
+          <ScalarProperty Name="nationnalité_auteur" ColumnName="nationnalité_auteur" />
+          <ScalarProperty Name="sexe_auteur" ColumnName="sexe_auteur" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categorie">
+      <EntityTypeMapping TypeName="Loango_dbModel.Categorie">
+        <MappingFragment StoreEntitySet="Categorie">
+          <ScalarProperty Name="id_cat" ColumnName="id_cat" />
+          <ScalarProperty Name="code_cat" ColumnName="code_cat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Edition">
+      <EntityTypeMapping TypeName="Loango_dbModel.Edition">
+        <MappingFragment StoreEntitySet="Edition">
+          <ScalarProperty Name="id_edition" ColumnName="id_edition" />
+          <ScalarProperty Name="nom_edition" ColumnName="nom_edition" />
+          <ScalarProperty Name="pays_edition" ColumnName="pays_edition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Livres">
+      <EntityTypeMapping TypeName="Loango_dbModel.Livres">
+        <MappingFragment StoreEntitySet="Livres">
+          <ScalarProperty Name="id_livre" ColumnName="id_livre" />
+          <ScalarProperty Name="titre_livre" ColumnName="titre_livre" />
+          <ScalarProperty Name="date_acqui_livre" ColumnName="date_acqui_livre" />
+          <ScalarProperty Name="anné_pub_livre" ColumnName="anné_pub_livre" />
+          <ScalarProperty Name="nbre_page_livre" ColumnName="nbre_page_livre" />
+          <ScalarProperty Name="id_auteur_liv" ColumnName="id_auteur_liv" />
+          <ScalarProperty Name="id_cat_liv" ColumnName="id_cat_liv" />
+          <ScalarProperty Name="id_rayon_liv" ColumnName="id_rayon_liv" />
+          <ScalarProperty Name="id_edition_liv" ColumnName="id_edition_liv" />
+          <ScalarProperty Name="id_user_liv" ColumnName="id_user_liv" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rayon">
+      <EntityTypeMapping TypeName="Loango_dbModel.Rayon">
+        <MappingFragment StoreEntitySet="Rayon">
+          <ScalarProperty Name="id_rayon" ColumnName="id_rayon" />
+          <ScalarProperty Name="code_rayon" ColumnName="code_rayon" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="Loango_dbModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="nom_user" ColumnName="nom_user" />
+          <ScalarProperty Name="prenom_user" ColumnName="prenom_user" />
+          <ScalarProperty Name="contact_user" ColumnName="contact_user" />
+          <ScalarProperty Name="est_actif" ColumnName="est_actif" />
+          <ScalarProperty Name="password_user" ColumnName="password_user" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

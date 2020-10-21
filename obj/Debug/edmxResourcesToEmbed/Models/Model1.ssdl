@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Loango_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Auteur">
+    <Key>
+      <PropertyRef Name="id_auteur" />
+    </Key>
+    <Property Name="id_auteur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nom_auteur" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="nationnalité_auteur" Type="varchar" MaxLength="50" />
+    <Property Name="sexe_auteur" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Categorie">
+    <Key>
+      <PropertyRef Name="id_cat" />
+    </Key>
+    <Property Name="id_cat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code_cat" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Edition">
+    <Key>
+      <PropertyRef Name="id_edition" />
+    </Key>
+    <Property Name="id_edition" Type="int" Nullable="false" />
+    <Property Name="nom_edition" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="pays_edition" Type="varbinary" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Livres">
+    <Key>
+      <PropertyRef Name="id_livre" />
+    </Key>
+    <Property Name="id_livre" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="titre_livre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="date_acqui_livre" Type="datetime" Nullable="false" />
+    <Property Name="anné_pub_livre" Type="date" />
+    <Property Name="nbre_page_livre" Type="int" Nullable="false" />
+    <Property Name="id_auteur_liv" Type="int" Nullable="false" />
+    <Property Name="id_cat_liv" Type="int" />
+    <Property Name="id_rayon_liv" Type="int" />
+    <Property Name="id_edition_liv" Type="int" />
+    <Property Name="id_user_liv" Type="int" />
+  </EntityType>
+  <EntityType Name="Rayon">
+    <Key>
+      <PropertyRef Name="id_rayon" />
+    </Key>
+    <Property Name="id_rayon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code_rayon" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="id_user" />
+    </Key>
+    <Property Name="id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nom_user" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="prenom_user" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="contact_user" Type="varchar" MaxLength="50" />
+    <Property Name="est_actif" Type="char" MaxLength="5" Nullable="false" />
+    <Property Name="password_user" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Livres_Auteur">
+    <End Role="Auteur" Type="Self.Auteur" Multiplicity="1" />
+    <End Role="Livres" Type="Self.Livres" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Auteur">
+        <PropertyRef Name="id_auteur" />
+      </Principal>
+      <Dependent Role="Livres">
+        <PropertyRef Name="id_auteur_liv" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Livres_Categorie">
+    <End Role="Categorie" Type="Self.Categorie" Multiplicity="0..1" />
+    <End Role="Livres" Type="Self.Livres" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categorie">
+        <PropertyRef Name="id_cat" />
+      </Principal>
+      <Dependent Role="Livres">
+        <PropertyRef Name="id_cat_liv" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Livres_Edition">
+    <End Role="Edition" Type="Self.Edition" Multiplicity="0..1" />
+    <End Role="Livres" Type="Self.Livres" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Edition">
+        <PropertyRef Name="id_edition" />
+      </Principal>
+      <Dependent Role="Livres">
+        <PropertyRef Name="id_edition_liv" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Livres_Rayon">
+    <End Role="Rayon" Type="Self.Rayon" Multiplicity="0..1" />
+    <End Role="Livres" Type="Self.Livres" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rayon">
+        <PropertyRef Name="id_rayon" />
+      </Principal>
+      <Dependent Role="Livres">
+        <PropertyRef Name="id_rayon_liv" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Livres_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Livres" Type="Self.Livres" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="Livres">
+        <PropertyRef Name="id_user_liv" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Loango_dbModelStoreContainer">
+    <EntitySet Name="Auteur" EntityType="Self.Auteur" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Categorie" EntityType="Self.Categorie" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Edition" EntityType="Self.Edition" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Livres" EntityType="Self.Livres" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rayon" EntityType="Self.Rayon" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Livres_Auteur" Association="Self.FK_Livres_Auteur">
+      <End Role="Auteur" EntitySet="Auteur" />
+      <End Role="Livres" EntitySet="Livres" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Livres_Categorie" Association="Self.FK_Livres_Categorie">
+      <End Role="Categorie" EntitySet="Categorie" />
+      <End Role="Livres" EntitySet="Livres" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Livres_Edition" Association="Self.FK_Livres_Edition">
+      <End Role="Edition" EntitySet="Edition" />
+      <End Role="Livres" EntitySet="Livres" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Livres_Rayon" Association="Self.FK_Livres_Rayon">
+      <End Role="Rayon" EntitySet="Rayon" />
+      <End Role="Livres" EntitySet="Livres" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Livres_User" Association="Self.FK_Livres_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Livres" EntitySet="Livres" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
