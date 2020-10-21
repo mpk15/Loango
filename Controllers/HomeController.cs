@@ -22,7 +22,7 @@ namespace Loango_app.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Contactez l'administration";
 
             return View();
         }
